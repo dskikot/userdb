@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Удаление пользователя
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Удаление пользователя</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <img src="{{ user.photo.url }}" class="rounded" alt="{{ user.last_name }}">
+        </div>
+        <div class="col-md-6">
+            <form method="post">{% csrf_token %}
+                <h2 class="mb-5">Вы действительно хотите удалить пользователя: "{{ object }}"?</h2>
+                <input class="btn btn-danger" type="submit" value="Удалить">
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

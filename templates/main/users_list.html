@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Список пользователей
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Список пользователей</h1>
+
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="mr-2">
+                <a class="btn btn-info btn-sm" href="{% url 'user_create' %}">
+                    <span data-feather="user-plus"></span>
+                    Добавить пользователя
+                </a>
+                <a class="btn btn-info btn-sm" href="{% url 'export' %}">
+                    <span data-feather="file-text"></span>
+                    Экспорт в Excel
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <form>
+        <b>Фильтрация:</b>
+        {{ form }}
+        <input type="submit" class="btn btn-primary btn-sm" value="Применить фильтры">
+        <input type="reset" class="btn btn-secondary btn-sm" value="Очистить">
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Дата рождения</th>
+                <th>Карточка</th>
+                <th>Удалить</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.pk }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.date_of_birth }}</td>
+                    <td>
+                        <a class="btn btn-light btn-sm" href="{{ user.get_absolute_url }}"
+                           title="Карточка пользователя">
+                            <span data-feather="edit"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" href="{% url 'user_delete' user.pk %}"
+                           title="Удалить пользователя">
+                            <span data-feather="x"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

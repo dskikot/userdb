@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Голосование
+{% endblock %}
+
+{% block content %}
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Голосование</h1>
+        </div>
+
+        <div class="row">
+            {% for user in users %}
+                <div class="col-md-4">
+                    <div class="mb-4 shadow text-center">
+                        <img src="{{ user.photo.url }}" class="img-thumbnail" alt="{{ user.last_name }}" width="200">
+                        <div class="card-body">
+                            <b>{{ user }}</b>
+                            <p>Счет: <span id="score-{{ user.id }}"></span></p>
+                            <a href="#" id="link-{{ user.id }}" class="btn btn-outline-success btn-sm"
+                               role="button">+1</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    <script src="{% static 'js/users.js' %}"></script>
+{% endblock %}
+

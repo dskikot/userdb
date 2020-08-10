@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Информация о пользователе
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Информация о пользователе</h1>
+
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="mr-2">
+                <a class="btn btn-danger btn-sm" href="{% url 'user_delete' user.pk %}">
+                    <span data-feather="user-minus"></span>
+                    Удалить пользователя
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <img src="{{ user.photo.url }}" class="rounded" alt="{{ user.last_name }}">
+        </div>
+        <div class="col-md-6">
+            <h4>Фамилия: {{ user.last_name }}</h4>
+            <h4>Имя: {{ user.first_name }}</h4>
+            <h4>Дата рождения: {{ user.date_of_birth }}</h4>
+            <h4>Возраст: {{ user.get_age }}</h4>
+        </div>
+    </div>
+{% endblock %}
+
